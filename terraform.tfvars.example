@@ -1,0 +1,16 @@
+root_password=""
+vsphere_password=""
+vsphere_user=""
+vsphere_server=""
+datacenter_name=""
+cluster_name=""
+datastore=""
+template_name=""
+network_0=""
+network_1=""
+network_2=""
+mgmt_ip_prefix=""
+mgmt_netmask=24
+gateway=""
+dns_servers=["",""]
+domain=""
