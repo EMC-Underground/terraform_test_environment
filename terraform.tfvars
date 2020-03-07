@@ -1,0 +1,16 @@
+node_count             = 1
+vm_name_prefix         = "cicd-test-server"
+datacenter_name        = "PacLabs"
+cluster_name           = "production"
+datastore              = "prod_sio_ds01"
+template_name_centos7  = "centos7_template"
+template_name_centos8  = "centos8_template"
+template_name_ubuntu18 = "ubuntu18_template"
+network_0              = "pg_344"
+network_1              = "sio_data_pg1"
+network_2              = "sio_data_pg2"
+gateway                = "10.237.198.1"
+mgmt_ip_prefix         = "10.237.198.8"
+mgmt_netmask           = 24
+dns_servers            = ["10.237.198.253", "10.201.16.29"]
+domain                 = "paclabs.se.emc.com"
