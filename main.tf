@@ -6,8 +6,7 @@ provider "vsphere" {
 }
 
 provider "vault" {
-  address = "http://vault.10.237.198.110.xip.io"
-  token   = "s.nwvmAKgBxHqbv7CxYAPLhFIQ"
+  token = "s.nwvmAKgBxHqbv7CxYAPLhFIQ"
 }
 # Stores the terraform state file in S3 bucket.
 #terraform {
