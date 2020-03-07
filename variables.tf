@@ -1,9 +1,5 @@
-variable "vsphere_user" {}
-variable "vsphere_password" {}
-variable "vsphere_server" {}
 variable "node_count" {}
 variable "vm_name_prefix" {}
-variable "root_password" {}
 variable "datacenter_name" {}
 variable "cluster_name" {}
 variable "datastore" {}
