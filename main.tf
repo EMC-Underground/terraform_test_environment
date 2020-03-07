@@ -1,7 +1,7 @@
 provider "vsphere" {
-  user                 = var.vsphere_user
-  password             = var.vsphere_password
-  vsphere_server       = var.vsphere_server
+  user                 = "${data.vault_generic_secret.vsphere_user.data["value"]}"
+  password             = "${data.vault_generic_secret.vsphere_password.data["value"]}"
+  vsphere_server       = "${data.vault_generic_secret.vsphere_server.data["value"]}"
   allow_unverified_ssl = true
 }
 
@@ -17,53 +17,19 @@ provider "vault" {
 #}
 
 data "vault_generic_secret" "vsphere_password" {
-  path = "terraform/test"
+  path = "terraform/vsphere_password"
 }
 
-data "vault_generic_secret" "dnssuffix" {
-  path = "concourse/main/dnssuffix"
+data "vault_generic_secret" "vsphere_user" {
+  path = "terraform/vsphere_user"
 }
 
-output "the_secret" {
-  value = "${data.vault_generic_secret.vsphere_password.data["test"]}"
+data "vault_generic_secret" "vsphere_server" {
+  path = "terraform/vsphere_server"
 }
 
-output "dnssuffix" {
-  value = "${data.vault_generic_secret.dnssuffix.data["value"]}"
-}
-
-module "ubuntu18" {
-  source = "./services/ubuntu18"
-
-  node_count = var.node_count
-
-  vm_name_prefix = var.vm_name_prefix
-
-  root_password = var.root_password
-
-  datacenter_name = var.datacenter_name
-
-  cluster_name = var.cluster_name
-
-  datastore = var.datastore
-
-  template_name = var.template_name_ubuntu18
-
-  network_0 = var.network_0
-
-  network_1 = var.network_1
-
-  network_2 = var.network_2
-
-  mgmt_ip_prefix = var.mgmt_ip_prefix
-
-  mgmt_netmask = var.mgmt_netmask
-
-  gateway = var.gateway
-
-  dns_servers = var.dns_servers
-
-  domain = var.domain
+data "vault_generic_secret" "root_password" {
+  path = "terraform/root_password"
 }
 
 module "centos7" {
@@ -73,7 +39,7 @@ module "centos7" {
 
   vm_name_prefix = var.vm_name_prefix
 
-  root_password = var.root_password
+  root_password = "${data.vault_generic_secret.root_password.data["value"]}"
 
   datacenter_name = var.datacenter_name
 
@@ -82,40 +48,6 @@ module "centos7" {
   datastore = var.datastore
 
   template_name = var.template_name_centos7
-
-  network_0 = var.network_0
-
-  network_1 = var.network_1
-
-  network_2 = var.network_2
-
-  mgmt_ip_prefix = var.mgmt_ip_prefix
-
-  mgmt_netmask = var.mgmt_netmask
-
-  gateway = var.gateway
-
-  dns_servers = var.dns_servers
-
-  domain = var.domain
-}
-
-module "centos8" {
-  source = "./services/centos8"
-
-  node_count = var.node_count
-
-  vm_name_prefix = var.vm_name_prefix
-
-  root_password = var.root_password
-
-  datacenter_name = var.datacenter_name
-
-  cluster_name = var.cluster_name
-
-  datastore = var.datastore
-
-  template_name = var.template_name_centos8
 
   network_0 = var.network_0
 

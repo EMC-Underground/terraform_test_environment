@@ -36,8 +36,8 @@ jobs:
               cd terraform-test-environment-repo
               echo "vsphere_password: ${VSPHERE_PASSWORD}"
               echo "dns suffix: ${DNS_SUFFIX}"
+              env
               terraform init
-              terraform refresh
               terraform plan
 
 
