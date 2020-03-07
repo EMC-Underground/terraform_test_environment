@@ -38,6 +38,6 @@ jobs:
               echo "dns suffix: ${DNS_SUFFIX}"
               env
               terraform init
-              terraform plan
+              echo "yes" | terraform apply
 
 

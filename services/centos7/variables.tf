@@ -13,7 +13,7 @@ variable "mgmt_netmask" {}
 variable "gateway" {}
 
 variable "dns_servers" {
-  type = "list"
+  type = list
 }
 
 variable "domain" {}

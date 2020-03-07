@@ -1,7 +1,7 @@
 provider "vsphere" {
-  user                 = "${data.vault_generic_secret.vsphere_user.data["value"]}"
-  password             = "${data.vault_generic_secret.vsphere_password.data["value"]}"
-  vsphere_server       = "${data.vault_generic_secret.vsphere_server.data["value"]}"
+  user                 = data.vault_generic_secret.vsphere_user.data["value"]
+  password             = data.vault_generic_secret.vsphere_password.data["value"]
+  vsphere_server       = data.vault_generic_secret.vsphere_server.data["value"]
   allow_unverified_ssl = true
 }
 
@@ -39,7 +39,7 @@ module "centos7" {
 
   vm_name_prefix = var.vm_name_prefix
 
-  root_password = "${data.vault_generic_secret.root_password.data["value"]}"
+  root_password = data.vault_generic_secret.root_password.data["value"]
 
   datacenter_name = var.datacenter_name
 

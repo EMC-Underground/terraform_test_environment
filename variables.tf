@@ -12,9 +12,7 @@ variable "network_2" {}
 variable "mgmt_ip_prefix" {}
 variable "mgmt_netmask" {}
 variable "gateway" {}
-
 variable "dns_servers" {
-  type = "list"
+  type = list
 }
-
 variable "domain" {}
