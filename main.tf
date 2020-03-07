@@ -6,7 +6,6 @@ provider "vsphere" {
 }
 
 provider "vault" {
-  token = "s.nwvmAKgBxHqbv7CxYAPLhFIQ"
 }
 # Stores the terraform state file in S3 bucket.
 #terraform {
