@@ -5,6 +5,10 @@ provider "vsphere" {
   allow_unverified_ssl = true
 }
 
+provider "vault" {
+  address = "http://vault.10.237.198.110.xip.io"
+  token   = "s.nwvmAKgBxHqbv7CxYAPLhFIQ"
+}
 # Stores the terraform state file in S3 bucket.
 #terraform {
 #  backend "s3" {
@@ -13,6 +17,14 @@ provider "vsphere" {
 #    region = "us-east-1"
 #  }
 #}
+
+data "vault_generic_secret" "vsphere_password" {
+  path = "terraform/test"
+}
+
+output "the_secret" {
+  value = "${data.vault_generic_secret.vsphere_password.data["test"]}"
+}
 
 module "ubuntu18" {
   source = "./services/ubuntu18"
