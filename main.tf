@@ -22,8 +22,16 @@ data "vault_generic_secret" "vsphere_password" {
   path = "terraform/test"
 }
 
+data "vault_generic_secret" "dnssuffix" {
+  path = "concourse/main/dnssuffix"
+}
+
 output "the_secret" {
   value = "${data.vault_generic_secret.vsphere_password.data["test"]}"
+}
+
+output "dnssuffix" {
+  value = "${data.vault_generic_secret.dnssuffix.data["value"]}"
 }
 
 module "ubuntu18" {
