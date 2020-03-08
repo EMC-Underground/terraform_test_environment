@@ -35,10 +35,7 @@ jobs:
             - -c
             - |
               cd terraform-test-environment-repot
-              fly -t main login -u ${CONCOURSE_USERNAME} -p ${CONCOURSE_PASSWORD} \
-              -c ${CONCOURSE_URL}
-
-
+              fly -t main login -u ${CONCOURSE_USERNAME} -p ${CONCOURSE_PASSWORD} -c ${CONCOURSE_URL}
   - name: build-test-vm`
     public: true
     plan:
