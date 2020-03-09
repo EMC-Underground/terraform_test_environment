@@ -39,5 +39,6 @@ jobs:
               cd ./terraform-test-environment-repo
               ls -la
               ls -la ./task
-              echo "y" | fly -t main sp -c ./task/build-test-vm.yml -p build-test-vm
+              fly -t main sp -c ./task/build-test-vm.yml -p build-test-vm -n
+              fly -t main unpause-pipeline -p build-test-vm
 
