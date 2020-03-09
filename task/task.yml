@@ -22,7 +22,7 @@ jobs:
           VAULT_TOKEN: ((root_token))
         config:
           inputs:
-            - name terraform-test-environment-repo
+            - name: terraform-test-environment-repo
           platform: linux
           image_resource:
             type: docker-image
