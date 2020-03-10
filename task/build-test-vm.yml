@@ -6,10 +6,17 @@ resources:
       uri: https://github.com/EMC-Underground/terraform_test_environment.git
       branch: master
 
+resources:
+  - name: ansible-dockerswarm-install-repo
+    type: git
+    source:
+      uri: https://github.com/EMC-Underground/ansible_dockerswarm_install.git
+      branch: dev
 
 jobs:
-  - name: build-test-vm`
+  - name: build-test-vm
     public: true
+    serial: true
     plan:
       - get: terraform-test-environment-repo
         trigger: true
@@ -35,4 +42,56 @@ jobs:
               terraform init
               echo "yes" | terraform apply
 
+  - name: run-ansible-role
+    public: true
+    serial: true
+    plan:
+      - get: terraform-test-environment-repo
+      - task: run-ansible-role
+        params:
+          VAULT_ADDR: ((vault_addr))
+          VAULT_TOKEN: ((root_token))
+        config:
+          inputs:
+            - name: tansible-dockerswarm-install-repo
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: bsoper/alpine-ansible
+              tag: latest
+          run:
+            path: sh
+            args:
+            - -c
+            - |
+              cd ansible-dockerswarm-install
+              ansible-galaxy install -r requirements.yml
 
+
+
+  - name: destroy-test-vm
+    public: true
+    serial: true
+    plan:
+      - get: terraform-test-environment-repo
+      - task: deploy-test-vm
+        params:
+          VAULT_ADDR: ((vault_addr))
+          VAULT_TOKEN: ((root_token))
+        config:
+          inputs:
+            - name: terraform-test-environment-repo
+          platform: linux
+          image_resource:
+            type: docker-image
+            source:
+              repository: hashicorp/terraform
+              tag: latest
+          run:
+            path: sh
+            args:
+            - -c
+            - |
+              cd terraform-test-environment-repo
+              echo "yes" | terraform destroy
