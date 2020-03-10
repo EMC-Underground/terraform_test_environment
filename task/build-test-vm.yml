@@ -15,10 +15,8 @@ jobs:
         trigger: true
       - task: deploy-test-vm
         params:
-          DNS_SUFFIX: ((dnssuffix))
           VAULT_ADDR: ((vault_addr))
           VAULT_TOKEN: ((root_token))
-          VSPHERE_PASSWORD: ((vsphere_password))
         config:
           inputs:
             - name: terraform-test-environment-repo
@@ -34,9 +32,6 @@ jobs:
             - -c
             - |
               cd terraform-test-environment-repo
-              echo "vsphere_password: ${VSPHERE_PASSWORD}"
-              echo "dns suffix: ${DNS_SUFFIX}"
-              env
               terraform init
               echo "yes" | terraform apply
 
