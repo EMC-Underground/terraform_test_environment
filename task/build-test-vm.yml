@@ -46,7 +46,7 @@ jobs:
     public: true
     serial: true
     plan:
-      - get: terraform-test-environment-repo
+      - get: ansible-dockerswarm-install-repo
       - task: run-ansible-role
         params:
           VAULT_ADDR: ((vault_addr))
