@@ -101,3 +101,7 @@ resource "vsphere_virtual_machine" "Docker_Hostvm" {
     }
   }
 }
+
+output "ip" {
+  value = vsphere_virtual_machine.Docker_Hostvm[0].default_ip_address
+}

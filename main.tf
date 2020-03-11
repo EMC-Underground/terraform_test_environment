@@ -65,3 +65,9 @@ module "centos7" {
 
   domain = var.domain
 }
+
+
+
+output "ip_address" {
+  value = module.centos7.ip
+}
