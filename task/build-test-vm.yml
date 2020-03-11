@@ -11,7 +11,7 @@ resources:
     type: git
     source:
       uri: https://github.com/EMC-Underground/ansible_dockerswarm_install.git
-      branch: dev
+      branch: master
 
 jobs:
   - name: build-test-vm
