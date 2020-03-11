@@ -35,10 +35,7 @@ jobs:
             - |
               fly -t main login -u ${CONCOURSE_USERNAME} -p ${CONCOURSE_PASSWORD} -c ${CONCOURSE_URL}
               fly -t main sync
-              ls -la
               cd ./terraform-test-environment-repo
-              ls -la
-              ls -la ./task
               fly -t main sp -c ./task/build-test-vm.yml -p build-test-vm -n
               fly -t main unpause-pipeline -p build-test-vm
 
