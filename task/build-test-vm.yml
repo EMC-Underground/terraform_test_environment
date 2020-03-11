@@ -6,7 +6,6 @@ resources:
       uri: https://github.com/EMC-Underground/terraform_test_environment.git
       branch: master
 
-resources:
   - name: ansible-dockerswarm-install-repo
     type: git
     source:
