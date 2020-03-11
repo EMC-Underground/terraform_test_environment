@@ -53,7 +53,7 @@ jobs:
           VAULT_TOKEN: ((root_token))
         config:
           inputs:
-            - name: tansible-dockerswarm-install-repo
+            - name: ansible-dockerswarm-install-repo
           platform: linux
           image_resource:
             type: docker-image
