@@ -20,6 +20,8 @@ jobs:
       - get: terraform-test-environment-repo
         trigger: true
       - task: deploy-test-vm
+        on_success:
+          task: run-ansible-role
         params:
           VAULT_ADDR: ((vault_addr))
           VAULT_TOKEN: ((root_token))
