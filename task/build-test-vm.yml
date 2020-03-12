@@ -43,10 +43,6 @@ jobs:
               terraform init
               echo "yes" | terraform apply
 
-  - name: run-ansible-role
-    public: true
-    serial: true
-    plan:
       - get: ansible-dockerswarm-install-repo
       - task: run-ansible-role
         params:
@@ -69,12 +65,6 @@ jobs:
               cd ansible-dockerswarm-install-repo
               ansible-galaxy install -r requirements.yml
 
-
-
-  - name: destroy-test-vm
-    public: true
-    serial: true
-    plan:
       - get: terraform-test-environment-repo
       - task: deploy-test-vm
         params:
