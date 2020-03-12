@@ -8,13 +8,14 @@ provider "vsphere" {
 provider "vault" {
 }
 # Stores the terraform state file in S3 bucket.
-#terraform {
-#  backend "s3" {
-#    bucket = "brad.bucket"
-#    key    = "dockerswarm/terraform.tfstate"
-#    region = "us-east-1"
-#  }
-#}
+terraform {
+  backend "s3" {
+    bucket = "brad.bucket"
+    key    = "test_environment/terraform.tfstate"
+    region = "us-east-1"
+  }
+}
+
 
 data "vault_generic_secret" "vsphere_password" {
   path = "terraform/vsphere_password"
@@ -30,6 +31,14 @@ data "vault_generic_secret" "vsphere_server" {
 
 data "vault_generic_secret" "root_password" {
   path = "terraform/root_password"
+}
+
+data "vault_generic_secret" "aws_access_key_id" {
+  path = "terraform/aws_access_key_id"
+}
+
+data "vault_generic_secret" "aws_secret_access_key" {
+  path = "terraform/aws_secret_access_key"
 }
 
 module "centos7" {
@@ -65,8 +74,6 @@ module "centos7" {
 
   domain = var.domain
 }
-
-
 
 output "ip_address" {
   value = module.centos7.ip

@@ -20,11 +20,11 @@ jobs:
       - get: terraform-test-environment-repo
         trigger: true
       - task: deploy-test-vm
-        on_success:
-          task: run-ansible-role
         params:
           VAULT_ADDR: ((vault_addr))
           VAULT_TOKEN: ((root_token))
+          AWS_ACCESS_KEY_ID: ((aws_access_key_id))
+          AWS_SECRET_ACCESS_KEY: ((aws_secret_access_key))
         config:
           inputs:
             - name: terraform-test-environment-repo
@@ -65,11 +65,12 @@ jobs:
               cd ansible-dockerswarm-install-repo
               ansible-galaxy install -r requirements.yml
 
-      - get: terraform-test-environment-repo
       - task: deploy-test-vm
         params:
           VAULT_ADDR: ((vault_addr))
           VAULT_TOKEN: ((root_token))
+          AWS_ACCESS_KEY_ID: ((aws_access_key_id))
+          AWS_SECRET_ACCESS_KEY: ((aws_secret_access_key))
         config:
           inputs:
             - name: terraform-test-environment-repo
