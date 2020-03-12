@@ -66,7 +66,7 @@ jobs:
             args:
             - -c
             - |
-              cd ansible-dockerswarm-install
+              cd ansible-dockerswarm-install-repo
               ansible-galaxy install -r requirements.yml
 
 
@@ -95,4 +95,5 @@ jobs:
             - -c
             - |
               cd terraform-test-environment-repo
+              terraform init
               echo "yes" | terraform destroy
